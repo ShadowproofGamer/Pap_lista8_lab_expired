@@ -15,12 +15,12 @@ def listsIntoSum[A](tree:BT[A]):BT[A] = {
       case Node(x, y, z)::t if result==Empty => SumNode(x.sum, listsIntoSum_chaos(List(y), Empty), listsIntoSum_chaos(List(z), Empty))
   }
 
-  def listsIntoSum_rec[A](remaining: List[BT[A]], resultQ: List[Double]): List[Double] = {
+  def listsIntoSum_rec[A](remaining: List[BT[A]], next:List[BT[A]],  resultQ:List[Double]): List[Double] = {
     remaining match
       case List() => resultQ
       case List(Empty) => resultQ
-      case Empty :: t => listsIntoSum_rec(t, resultQ)
-      case Node(x, y, z) :: t if resultQ.isEmpty => listsIntoSum_rec(List(y, z), (x.sum)::resultQ)
+      case Empty :: t => listsIntoSum_rec(t, next, resultQ)
+      case Node(x, y, z) :: t if resultQ.isEmpty => listsIntoSum_rec(List(y, z), next, (x.sum)::resultQ)
   }
   listsIntoSum_chaos(List(tree), Empty)
 }
